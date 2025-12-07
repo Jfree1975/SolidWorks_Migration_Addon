@@ -3,6 +3,32 @@ import FreeCADGui as Gui
 import FreeCAD
 import json
 import os
+import shutil
+
+def install_themes():
+    """
+    Copies the theme .qss files from the addon directory to the user's
+    FreeCAD Gui/Stylesheets directory, where they can be found by the
+    Preferences dialog.
+    """
+    try:
+        addon_dir = os.path.dirname(__file__)
+        stylesheet_dir = os.path.join(FreeCAD.getUserAppDataDir(), "Gui", "Stylesheets")
+
+        if not os.path.exists(stylesheet_dir):
+            os.makedirs(stylesheet_dir)
+            FreeCAD.Console.PrintMessage("SW_Loader: Created user Stylesheets directory.\n")
+
+        themes = ["SolidWorks_Light.qss", "SolidWorks_Dark.qss"]
+        for theme_file in themes:
+            source_path = os.path.join(addon_dir, theme_file)
+            dest_path = os.path.join(stylesheet_dir, theme_file)
+            # Copy the file if it doesn't exist or if the source is newer
+            if not os.path.exists(dest_path) or os.path.getmtime(source_path) > os.path.getmtime(dest_path):
+                shutil.copyfile(source_path, dest_path)
+                FreeCAD.Console.PrintMessage(f"SW_Loader: Installed/Updated theme '{theme_file}'.\n")
+    except Exception as e:
+        FreeCAD.Console.PrintError(f"SW_Loader: Could not install themes automatically: {e}\n")
 
 def get_addon_dir():
     """Returns the path to this addon's directory."""
@@ -54,15 +80,16 @@ def create_toolbars(naming_map, reverse_lookup_map):
         mw.addToolBar(Gui.TopToolBarArea, toolbar)
 
 def run_migration():
-    FreeCAD.Console.PrintMessage("--- Loading SolidWorks Migration Suite ---
-")
+    # This now runs first to ensure themes are in place
+    install_themes()
+    
+    FreeCAD.Console.PrintMessage("--- Loading SolidWorks Migration Suite ---\n")
     naming_map = load_naming_map()
     if not naming_map: return
     reverse_map = create_reverse_lookup(naming_map)
     apply_renaming(naming_map)
     create_toolbars(naming_map, reverse_map)
-    FreeCAD.Console.PrintMessage("--- SolidWorks Migration Suite Loaded ---
-")
+    FreeCAD.Console.PrintMessage("--- SolidWorks Migration Suite Loaded ---\n")
 
-# This code runs when the addon is loaded via the Addon Manager
+# This code runs when the addon is loaded by FreeCAD
 run_migration()
