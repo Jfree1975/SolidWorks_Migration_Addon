@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package>
+    <name>SolidWorks Migration Suite</name>
+    <description>A preference pack and script suite to migrate the look, feel, and terminology of SolidWorks to FreeCAD.</description>
+    <version>1.1.0</version>
+    <author>Gemini Architect</author>
+    <license>MIT</license>
+    <url>https://github.com/YourUsername/FreeCAD-SolidWorks-Migration</url>
+    <type>addon</type>
+
+    <content>
+        <!-- Declare the Python module so FreeCAD adds it to the path -->
+        <module>
+            <path>./</path>
+        </module>
+
+        <!-- Declare the themes (preference packs) -->
+        <preferencepack>
+            <name>SolidWorks_Light</name>
+            <file>SolidWorks_Light.qss</file>
+        </preferencepack>
+        <preferencepack>
+            <name>SolidWorks_Dark</name>
+            <file>SolidWorks_Dark.qss</file>
+        </preferencepack>
+    </content>
+</package>

@@ -1,0 +1,13 @@
+/* SolidWorks Light Theme */
+QMainWindow, QWidget { background-color: #F0F0F0; color: #333333; }
+QToolBar { background-color: #E1E1E1; border: none; padding: 2px; }
+QToolButton:hover { background-color: #C9DEF5; border: 1px solid #376C9F; }
+QToolButton:checked { background-color: #DDEAFC; border: 1px solid #376C9F; }
+QDockWidget::title { background-color: #D1D1D1; color: #111111; font-weight: bold; padding: 8px; border-bottom: 1px solid #BDBDBD; }
+QTreeView { background-color: #FFFFFF; border: 1px solid #C0C0C0; }
+QTreeView::item:selected { background-color: #00A2E8; color: #FFFFFF; }
+QTabBar::tab:selected { background-color: #FFFFFF; border-top: 3px solid #376C9F; color: #111111; font-weight: bold; }
+QTabBar::tab { background-color: #E1E1E1; padding: 10px 20px; border: 1px solid #C0C0C0; border-bottom: none; }
+QLineEdit, QDoubleSpinBox, QSpinBox { background-color: #FFFFFF; border: 1px solid #A9A9A9; padding: 4px; }
+QPushButton { background-color: #F0F0F0; border: 1px solid #A9A9A9; padding: 6px 12px; }
+QPushButton:hover { background-color: #E0E8EF; border-color: #376C9F; }
